@@ -3,12 +3,12 @@ web application for Attendance system using Face Recognition (YOLOv5)
 
 
 ## Requiremnts
-+* pip install python
-+* pip install django
-+* pip install virtualenv
-+* pip install pillow
-+* pip install yolov5
-+* pip install opencv-python
++* pip install python <br>
++* pip install django <br>
++* pip install virtualenv <br>
++* pip install pillow <br>
++* pip install yolov5 <br>
++* pip install opencv-python <br>
 +* pip install numpy
 
 
