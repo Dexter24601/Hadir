@@ -12,7 +12,7 @@ web application for Attendance system using Face Recognition (YOLOv5)
 7- pip install numpy <br>
  <br>
  <br>
-###to run the app you need to do the following: <br>
+### to run the app you need to do the following: <br>
     * to create a virtual enviroment with the name 'env' <br>
           -virtualenv -p python3 env <br>
     * to activate the directory  <br>
