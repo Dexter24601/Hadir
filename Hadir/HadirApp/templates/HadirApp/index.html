@@ -1,0 +1,92 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hadir</title>
+    <link rel="stylesheet" href="{% static 'Hadir/main.css' %}">
+
+</head>
+
+<body>
+    <!-- <div id="intro">
+        <p> center</p>
+    </div> -->
+    <div class="page-wrapper">
+        <div class="nav-wrapper">
+            <div class="grad-bar"></div>
+            <nav class="navbar">
+                <a href="/Hadir/"><img src="{% static 'Hadir/media/logo.png' %}"></a>
+                <div class="menu-toggle" id="mobile-menu">
+                    <a class="nav-item" href="register">Register</a>
+                    <a class="nav-item" href="login">Login</a>
+
+                    <!-- <span class="bar">a</span>
+                    <span class="bar">b</span>
+                    <span class="bar">c</span> -->
+
+                </div>
+                <ul class="nav no-search">
+                    <!-- <li class="nav-item"><a href="#">Home</a></li> -->
+                    <!-- <li class="nav-item"><a href="#">Contact Us</a></li> -->
+                    <a class="nav-item" href="register">Register</a>
+                    <a class="nav-item" href="login">Login</a>
+                    <!-- <i class="fas fa-search" id="search-icon"></i> -->
+                    <!-- <input class="search-input" type="text" placeholder="Search.."> -->
+                </ul>
+            </nav>
+        </div>
+        <section class="headline">
+            <h1>Welcome to Hadir</h1>
+            <p>A smart attendance Registeration service using Face Recognition!</p>
+        </section>
+        <section class="features">
+            <div class="feature-container">
+                <img src="{% static 'Hadir/media/image-removebg-preview.png' %}" alt="Flexbox Feature">
+                <h2>Attendance Registeration</h2>
+                <p>Attandance Registeration is now easier than ever, with the highest acuracy and lowest effort.</p>
+            </div>
+            <div class="feature-container">
+                <img src="{% static 'Hadir/media/2199581-removebg-preview.png' %}" alt="Flexbox Feature">
+                <h2>Faical Recognition Featured</h2>
+                <p>Using the latest technology in the Biometric Artificial Intelligence feild we imleminted a facial
+                    recognition attandance system using YOLOv5 algorithm.</p>
+            </div>
+            <div class="feature-container">
+                <img src="{% static 'Hadir/media/pngtree-graph-icon-line-design--business-icon-vector-design-png-image_902145-removebg-preview.png' %}"
+                    alt="Flexbox Feature">
+                <h2>Attendance Tracking</h2>
+                <p>our website allows you to moniter the Attandance information readily and clearness.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+
+        <p> ©2022
+            Capstone project section (198), All Rights Reserved
+        </p>
+    </footer>
+    <script>
+        $("#search-icon").click(function () {
+            $(".nav").toggleClass("search");
+            $(".nav").toggleClass("no-search");
+            $(".search-input").toggleClass("search-active");
+        });
+
+        $('.menu-toggle').click(function () {
+            $(".nav").toggleClass("mobile-nav");
+            $(this).toggleClass("is-active");
+        });
+
+    </script>
+</body>
+
+</html>
+<!-- https://cdn-icons-png.flaticon.com/512/2199/2199581.png
+https://png.pngtree.com/png-vector/20190331/ourlarge/pngtree-graph-icon-line-design--business-icon-vector-design-png-image_902145.jpg
+https://o.remove.bg/downloads/0585b363-e995-4a32-b398-467feeed7342/image-removebg-preview.png -->

@@ -1,0 +1,155 @@
+{% extends 'HadirApp/base.html' %}
+{% block main_content %}
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class</title>
+    <link rel="stylesheet" href="{% static 'Hadir/log-reg-style.css' %}">
+    <link rel="stylesheet" href="{% static 'Hadir/main.css' %}">
+    <link rel="stylesheet" href="{% static 'Hadir/class.css' %}">
+    <link rel="stylesheet" href="{% static 'Hadir/attendance.css' %}">
+    <style>
+        body {
+            background: #ECF0F1 !important;
+
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="../front/mainStyle.css"> -->
+</head>
+
+<body>
+
+    <div class="container">
+        <h1> Create new class</h1>
+        <div class="info-cont">
+
+            <form action="Create_class" method="POST">
+                {% csrf_token %}
+                <label for="">Section ID</label>
+                <input type="text" id="classID" name="classID" maxlength="3" required="required">
+                {% if idErr %}
+                <p style="color: brown;">{{ idErr }}</p>
+                {% endif %}
+                <br>
+                <label for="">Course Name</label>
+                <input name="className" id="className" type="text" maxlength="20" required="required">
+                <br>
+                <label for="numOfStudents">Number of students</label>
+                <input type="number" name="numOfStudents" id="numOfStudents" min="10" max="100" required="required">
+
+                <!-- <select name="numOfStudents" id="numOfStudents">
+
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                    <option value="32">32</option>
+                    <option value="33">33</option>
+                    <option value="34">34</option>
+                    <option value="35">35</option>
+                    <option value="36">36</option>
+                    <option value="37">37</option>
+                    <option value="38">38</option>
+                    <option value="39">39</option>
+                    <option value="41">40</option>
+                    <option value="42">41</option>
+                    <option value="43">42</option>
+                    <option value="44">43</option>
+                    <option value="45">44</option>
+                    <option value="46">45</option>
+                </select> -->
+                <br>
+                <button class="Generate" type="button">Generate QR-Code</button>
+
+                <div>
+                    <a href="" target="_blank">
+                        <img style="display: none;" class="qrImg" src="" alt=" " width="256" height="256">
+
+                    </a>
+                    <a id="aa" href="" target="_blank"></a>
+                </div>
+
+                <button style="display: none;" class="Create" type="submit">Create Class</button>
+
+            </form>
+
+        </div>
+    </div>
+
+    <script>
+        const wrapper = document.querySelector(".container"),
+            classID = wrapper.querySelector("#classID"),
+            className = wrapper.querySelector("#className")
+        createBtn = wrapper.querySelector('.Create'),
+            generateBtn = wrapper.querySelector(".Generate"),
+            qrImg = wrapper.querySelector('img'),
+            url = wrapper.querySelector('#aa');
+        let preValue;
+
+
+        generateBtn.addEventListener('click', () => {
+
+            qrImg.style.display = 'block'
+            createBtn.style.display = 'block';
+            console.log(className);
+            let qrValue = (className.value + '-' + classID.value).trim();
+            console.log(qrValue);
+            if (!qrValue || preValue === qrValue) return;
+            preValue = qrValue;
+            generateBtn.innerText = "Generating QR Code...";
+            qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://localhost:8000/Hadir/student_enrollment/${qrValue}`;
+            url.href = `http://localhost:8000/Hadir/student_enrollment/${qrValue}`;
+
+            qrImg.addEventListener('load', () => {
+                wrapper.classList.add("active");
+                generateBtn.innerText = 'Generating QR Code...'
+                url.text = "Generated Class Form";
+            });
+
+            url.addEventListener('load', () => {
+
+                wrapper.classList.add("active");
+            })
+        });
+
+        classID.addEventListener("keyup", () => {
+            if (!classID.value.trim()) {
+                wrapper.classList.remove("active");
+                preValue = "";
+            }
+        });
+
+    </script>
+</body>
+
+</html>
+
+{% endblock %}

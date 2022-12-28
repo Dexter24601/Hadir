@@ -1,0 +1,10 @@
+{% extends 'HadirApp/base.html' %}
+
+{% block main_content %}
+
+{% if classStd %}
+
+<a href="Classes/{{class.class_name}}-{{class.class_id}}">{{class}}</a><br>
+
+{% endif %}
+{% endblock %}

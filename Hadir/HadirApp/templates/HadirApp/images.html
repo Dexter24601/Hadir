@@ -1,0 +1,18 @@
+{% extends 'HadirApp/base.html' %}
+
+{% block main_content %}
+
+{% if image %}
+
+<h1>images:</h1>
+{% for img in image %}
+
+<img src="/{{img}}" alt="image {{img.img_id}}" title="{{img.images.name}}">
+{% endfor %}
+
+
+{% else %}
+<h1>Error</h1>
+{% endif %}
+
+{% endblock %}

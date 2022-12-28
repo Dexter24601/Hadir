@@ -1,0 +1,37 @@
+{% extends 'HadirApp/base.html' %}
+{% block main_content %}
+
+
+{% if users %}
+<h1>Users:</h1>
+{% for user in users %}
+<p>{{user.username}}</p>
+{% endfor %}
+{% endif %}
+<br>
+
+{% if students %}
+<h1>students:</h1>
+{% for student in students %}
+<p>{{student.name}} -{{student.student_id}}</p>
+{% endfor %}
+{% endif %}
+<br>
+
+{% if images %}
+<h1>images:</h1>
+{% for image in images %}
+<p>{{image}}</p>
+{% endfor %}
+{% endif %}
+<br>
+{% if classes %}
+<h1>classes:</h1>
+{% for class in classes %}
+<p>{{class}}</p>
+{% endfor %}
+{% endif %}
+<br>
+
+
+{% endblock %}

@@ -1,0 +1,64 @@
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+    background: #eef0ef;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+
+
+.container {
+    margin: 30px auto;
+    border: 1px transparent;
+    border-radius: 5px;
+    width: 90%;
+    background: #fff;
+    padding: 10px;
+}
+
+.container h1 {
+    color: rgb(69, 69, 198);
+    margin-bottom: 20px;
+}
+
+.info-cont {
+    justify-content: start;
+    white-space: wrap;
+    font-size: 14px;
+}
+
+.info-cont input {
+    /* width: 100px; */
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+/* students-num {
+    height: 50px;
+} */
+
+select {
+    color: rgb(0, 0, 0);
+    min-width: 30px;
+    margin-left: 20px;
+    margin: 10px 0 10px 0;
+}
+
+
+#table {
+
+    border: 1px solid saddlebrown;
+    margin-top: 50px;
+
+
+}
+
+#qr {
+
+    display: flex;
+    margin: 50px auto;
+    opacity: 0;
+}

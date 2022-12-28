@@ -1,0 +1,15 @@
+{% extends 'HadirApp/base.html' %}
+{% block main_content%}
+
+
+<form action="{% url 'HadirApp:absent' student.id %}" method="POST">
+    {% csrf_token %}
+
+    <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}">
+    <label for="choice{{forloop.counter}}"> {{choice.choice_text}}</label><br>
+    {% endfor %}
+
+    <br><input type="submit" value="Vote">
+</form>
+
+{% endblock %}
