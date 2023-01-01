@@ -20,15 +20,5 @@ web application for Attendance system using Face Recognition (YOLOv5)
            -env/Scripts/activate <br>
       **for mac/linux** <br>
            - **source** env/Scripts/activate <br>
-   * **to start a project with the name "Hadir"** <br>
-        -django-admin startproject Hadir <br>
-     
-   * **to start an app with the name "HadirApp"** <br>
-         -python manage.py startapp HadirApp        <br>     
-    
-   * **to create super user (admin)** <br>
-         -python manage.py createsuperuser     <br>    
-     
-      <br>
-      <br>
+  
    ### best of luck
