@@ -14,11 +14,11 @@ web application for Attendance system using Face Recognition (YOLOv5)
  <br>
 ### to run the app you need to do the following: <br>
    * to create a virtual enviroment with the name 'env' <br>
-          -virtualenv -p python3 env <br>
+           virtualenv -p python3 env <br>
    * to activate the directory  <br>
       **for window** <br>
-           -env/Scripts/activate <br>
+           env/Scripts/activate <br>
       **for mac/linux** <br>
-           - **source** env/Scripts/activate <br>
+           **source** env/Scripts/activate <br>
   
    ### best of luck
