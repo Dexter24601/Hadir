@@ -201,17 +201,28 @@ def Classes(request):
     return render(request, 'HadirApp/classes.html', {'classes': classes})
 
 
+
 def clas(request, class_id, class_name):
 
     try:
         if Class.objects.filter(class_id=class_id).exists():
-            clas = Class.objects.get(class_id=class_id)
-            students = Student.objects.all
+            currentClass = Class.objects.get(class_id=class_id)
+            students = Student.objects.all()
             classStd = []
-            print('exist!')
             for student in students:
-                if student.classes == clas:
-                    classStd.append(student)
+                print(
+                    f'student === {student},,,, classes === {student.classes.all()}')
+                for clas in student.classes.all():
+                    if clas == currentClass:
+                        classStd.append(student)
+                        # classStd.save()
+
+            if not classStd:
+                print('no student in this class')
+
+            print(classStd)
+
+            return render(request, 'HadirApp/class.html', {'classStd': classStd, 'currentClass': currentClass})
         else:
             print('class 404 Not Found')
             return redirect('/Hadir/404')
@@ -221,7 +232,6 @@ def clas(request, class_id, class_name):
         return redirect('/Hadir/404')
 
     return render(request, 'HadirApp/class.html')  # , {'classStd': classStd}
-
 
 def welcomeBack(request, username):
     return HttpResponse(f"welcome {username}")
