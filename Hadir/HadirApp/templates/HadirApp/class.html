@@ -2,9 +2,13 @@
 
 {% block main_content %}
 
-{% if classStd %}
 
-<a href="Classes/{{class.class_name}}-{{class.class_id}}">{{class}}</a><br>
+<ul>
+    <h2>{{currentClass}} students:</h2>
+    {% for student in classStd %}
+    <li>{{student}}</li>
+</ul>
 
-{% endif %}
+{% endfor %}
+<a href="/Hadir/student_enrollment/{{currentClass.class_name}}-{{currentClass.class_id}}"> add students</a>
 {% endblock %}
