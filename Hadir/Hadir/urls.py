@@ -69,8 +69,11 @@ urlpatterns = [
          views.welcomeBack, name="welcomeBack"),
 
 
-    path('Hadir/404', views.PageNotFound, name="PageNotFound")
+    path('Hadir/404', views.PageNotFound, name="PageNotFound"),
     # http://localhost:8000/Hadir/404
+    
+    path('Hadir/take_attendance', views.take_attendance, name="take_attendance")
+    # http://localhost:8000/Hadir/take_attendance
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # X:\TU\Capstone project\Engine\Django\Project\Hadir\HadirApp\views.py
