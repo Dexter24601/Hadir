@@ -100,6 +100,7 @@ def login(request):
     return render(request, './HadirApp/login.html')
 
 
+
 def student_enrollment(request, class_name, class_id):
 
     if request.method == 'POST':
@@ -119,16 +120,27 @@ def student_enrollment(request, class_name, class_id):
             if Student.objects.filter(student_id=student_id).exists():
                 st = Student.objects.get(student_id=student_id)
 
-                if st.classes == classes:
-                    idErr = 'A Student with this ID already exsist in this class'
-                    print(idErr)
-                    return render(request, 'HadirApp/student_enrollment.html', {'idErr': idErr})
-                pass
+                for clas in st.classes.all():
+
+                    if st.classes == classes:
+                        idErr = 'A Student with this ID already exsist in this class'
+                        print(idErr)
+                        return render(request, 'HadirApp/student_enrollment.html', {'idErr': idErr})
+                
+                st.classes.add(classes)
+                st.save()
+
+                messages.success(
+                    request, f'Student {st.name} has been added to {classes.class_name} class succesfuly')
+                # 'succMsg':succMsg
+                return render(request, 'HadirApp/student_enrollment.html', {'class_name': classes.class_name})
+          
             elif not match:
                 wrongID = 'Invalid Student ID!'
                 print(wrongID)
                 return render(request, 'HadirApp/student_enrollment.html', {'wrongID': wrongID})
                 # see the vid https://www.youtube.com/watch?v=f3iytAmzuNQ&t=298s
+
             student = Student.objects.create(
                 name=name, student_id=student_id)  # classes=classes
 
