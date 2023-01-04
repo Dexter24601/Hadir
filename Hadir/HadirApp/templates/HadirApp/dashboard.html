@@ -1,0 +1,305 @@
+{% extends 'HadirApp/base.html' %}
+{% block main_content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+    * {
+      margin: 0;
+      padding: 0;
+      outline: none;
+      border: none;
+      text-decoration: none;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: #fff;
+    }
+
+
+    .container {
+      display: flex;
+    }
+
+    /* MAin Section */
+    .main {
+      position: relative;
+      padding: 20px;
+      width: 100%;
+    }
+
+    .main-top {
+      display: flex;
+      width: 100%;
+    }
+
+    .main-top i {
+      position: absolute;
+      right: 0;
+      margin: 10px 30px;
+      color: rgb(110, 109, 109);
+      cursor: pointer;
+    }
+
+    .main .users {
+      display: flex;
+      width: 100%;
+    }
+
+    .users .card {
+      width: 25%;
+      margin: 15px;
+      background: #fff;
+      text-align: center;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 3px 10px rgb(0 0 0 /0.3);
+    }
+
+    .users .card img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+    }
+
+    .users .card h3 {
+      text-transform: uppercase;
+    }
+
+    .users .card p {
+      font-size: 12px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .users table {
+      margin: auto;
+    }
+
+    .users .per span {
+      padding: 5px;
+      border-radius: 10px;
+      background: rgb(223, 223, 223);
+    }
+
+    .users td {
+      font-size: 14px;
+      padding-right: 15px;
+    }
+
+    .users .card button {
+      width: 100%;
+      margin-top: 8px;
+      padding: 7px;
+      cursor: pointer;
+      border-radius: 10px;
+      color: #599dd5;
+      background: transparent;
+      border: 1px solid #599dd5;
+    }
+
+    .users .card button:hover {
+      background: #599dd5;
+      color: #fff;
+      transition: 0.5s;
+    }
+
+    /*Attendance List serction  */
+    .attendance {
+      margin-top: 20px;
+      text-transform: capitalize;
+    }
+
+    .attendance-list {
+      width: 100%;
+      padding: 20px;
+      margin-top: 10px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgb(0 0 0 /0.3);
+    }
+
+
+    .table {
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 15px;
+      min-width: 100%;
+      overflow: hidden;
+      border-radius: 5px 5px 0 0;
+    }
+
+    table thead tr {
+      color: #fff;
+      background: #599dd5;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .table th,
+    .table td {
+      padding: 12px 15px;
+    }
+
+    .table tbody tr {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .table tbody tr:nth-of-type(odd) {
+      background: #f3f3f3;
+    }
+
+    .table tbody tr:last-of-type {
+      border-bottom: 2px solid #599dd5;
+    }
+
+    .table button {
+      padding: 6px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: #599dd5;
+      background: transparent;
+      border: 1px solid #599dd5;
+    }
+
+    .table button:hover {
+      background: #599dd5;
+      color: #fff;
+      transition: 0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <section class="main">
+      <div class="main-top">
+        <h1> <strong>{{class_name}}</strong> Attendance Dashboard</h1>
+      </div>
+      <div class="users">
+        <div class="card">
+          <img src="{% static 'Hadir/media/ibra.jpg' %}">
+          <h4>Ibrahim</h4>
+          <p>Student</p>
+          <div class="per">
+            <table>
+              <tr>
+                <td><span>85%</span></td>
+                <td><span>87%</span></td>
+              </tr>
+              <tr>
+                <td>Month</td>
+                <td>Year</td>
+              </tr>
+            </table>
+          </div>
+          <button>Profile</button>
+        </div>
+        <div class="card">
+          <img src="{% static 'Hadir/media/abdul.jpeg' %}">
+          <h4>Abduallah</h4>
+          <p>Student</p>
+          <div class="per">
+            <table>
+              <tr>
+                <td><span>82%</span></td>
+                <td><span>85%</span></td>
+              </tr>
+              <tr>
+                <td>Month</td>
+                <td>Year</td>
+              </tr>
+            </table>
+          </div>
+          <button>Profile</button>
+        </div>
+        <div class="card">
+          <img src="{% static 'Hadir/media/kh.jpg' %}">
+
+          <h4>Khaled</h4>
+          <p>Student</p>
+          <div class="per">
+            <table>
+              <tr>
+                <td><span>94%</span></td>
+                <td><span>92%</span></td>
+              </tr>
+              <tr>
+                <td>Month</td>
+                <td>Year</td>
+              </tr>
+            </table>
+          </div>
+          <button>Profile</button>
+        </div>
+        <div class="card">
+          <img src="{% static 'Hadir/media/mh1.jpg' %}">
+          <h4>Mohammed</h4>
+          <p>Student</p>
+          <div class="per">
+            <table>
+              <tr>
+                <td><span>85%</span></td>
+                <td><span>82%</span></td>
+              </tr>
+              <tr>
+                <td>Month</td>
+                <td>Year</td>
+              </tr>
+            </table>
+          </div>
+          <button>Profile</button>
+        </div>
+      </div>
+
+      <section class="attendance">
+        <div class="attendance-list">
+          <h1>Attendance List </h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID Number</th>
+                <th>Student Name</th>
+                <th>Course</th>
+                <th>Date</th>
+                <th>Login Time</th>
+                <th>Status</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td>01</td>
+                <td>Ibrahim</td>
+                <td>Coding</td>
+                <td>01-01-23</td>
+                <td>8:00AM</td>
+                <td>3:00PM</td>
+                <td><button>View</button></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </section>
+  </div>
+
+</body>
+
+</html>
+
+{% endblock %}

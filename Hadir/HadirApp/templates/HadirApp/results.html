@@ -1,0 +1,19 @@
+{% extends 'HadirApp/base.html' %}
+
+{% block main_content %}
+
+{% load static %}
+
+<h1>Present Students</h1>
+<ul>
+    {% for student in prestudents %}
+    <li>
+        {{student}}
+    </li>
+    {% endfor %}
+</ul>
+
+
+
+
+{% endblock %}

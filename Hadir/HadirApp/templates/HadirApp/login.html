@@ -24,7 +24,7 @@
         <div class="nav-wrapper">
             <div class="grad-bar"></div>
             <nav class="navbar">
-                <a href="/Hadir"><img src="{% static 'Hadir/media/logo.png' %}"></a>
+                <a href="/Hadir/"><img src="{% static 'Hadir/media/logo.png' %}"></a>
                 <div class="menu-toggle" id="mobile-menu">
                     <a class="nav-item" href="register">Register</a>
                     <a class="nav-item" href="login">Login</a>
@@ -46,14 +46,14 @@
         </div>
 
         <div id="container">
-            <form id="log-form" action="login" method="POST">
+            <form id="log-form" action="" method="POST">
                 {% csrf_token %}
                 <div class="box">
                     <h1>
                         Login
                     </h1>
-                    <input class="input" type="email" placeholder="Email@example.com" minlength="3"
-                        title="Enter your email" required='required' name="email" id="email">
+                    <input class="input" type="username" placeholder="username" minlength="3" title="Enter your email"
+                        required='required' name="username" id="email">
                     <!-- it is a must to use name and id -->
                     {% if emailErr %}
                     <span style="color: brown;" id="emailError">{{emailErr}} <a href="register">create
@@ -65,6 +65,9 @@
                     <span style="color: brown;" id="passError">{{passErr}} <a href="">Forgot password?</a></span>
                     {% endif %}
 
+                    {% if Err %}
+                    <span style="color: brown;" id="passError">{{Err}}</span>
+                    {% endif %}
                     <!-- <php?></php> -->
                     <button id="subtn" type="submit" value="submit">Login</button>
 

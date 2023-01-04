@@ -8,6 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hadir</title>
     <link rel="stylesheet" href="{% static 'Hadir/main.css' %}">
+    <link rel="stylesheet" href="{% static 'Hadir/log-reg-style.css' %}">
+    <link rel="stylesheet" href="{% static 'Hadir/main.css' %}">
+    <link rel="stylesheet" href="{% static 'Hadir/class.css' %}">
+    <link rel="stylesheet" href="{% static 'Hadir/attendance.css' %}">
 
 </head>
 
@@ -20,20 +24,22 @@
             <div class="grad-bar"></div>
             <nav class="navbar">
                 <a href="/Hadir/"><img src="{% static '/Hadir/media/logo.png' %}"></a>
-                <div class="menu-toggle" id="mobile-menu">
-                    <a class="nav-item" href="register">Register</a>
-                    <a class="nav-item" href="login">Login</a>
+                <!-- <div class="menu-toggle" id="mobile-menu">
+                    <a class="nav-item" href="/Hadir/register">Register</a>
+                    <a class="nav-item" href="/Hadir/login">Login</a> -->
 
-                    <!-- <span class="bar">a</span>
+                <!-- <span class="bar">a</span>
                     <span class="bar">b</span>
                     <span class="bar">c</span> -->
 
-                </div>
+                <!-- </div> -->
                 <ul class="nav no-search">
                     <!-- <li class="nav-item"><a href="#">Home</a></li> -->
                     <!-- <li class="nav-item"><a href="#">Contact Us</a></li> -->
-                    <a class="nav-item" href="register">Register</a>
-                    <a class="nav-item" href="login">Login</a>
+                    <a class="nav-item" href="/Hadir/register">Register</a>
+                    <a class="nav-item" href="/Hadir/login">Login</a>
+                    <a class="nav-item" href="/Hadir/logout">Logout</a>
+
                     <!-- <i class="fas fa-search" id="search-icon"></i> -->
                     <!-- <input class="search-input" type="text" placeholder="Search.."> -->
                 </ul>

@@ -2,7 +2,18 @@
 
 {% block main_content %}
 
-{% for class in classes %}
+<p>Welcome {{request.user}}</p> <br>
+{% if theClasses %}
+{% for class in theClasses %}
 <a href="Classes/{{class.class_name}}-{{class.class_id}}">{{class}}</a><br>
 {% endfor %}
+{% endif %}
+
+{% if err %}
+
+<h1> {{err}}</h1>
+<h2><a href="Create_class">Create Class</a></h2>
+
+{% endif %}
+
 {% endblock %}

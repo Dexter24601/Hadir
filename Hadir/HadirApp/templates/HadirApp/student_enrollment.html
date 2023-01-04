@@ -59,7 +59,7 @@
 
                 <label for="file">Face Photos<span class="clue">(10 images at
                         least)</span></label>
-                <input type="file" multiple="multiple" name="images" id="file" accept="image/*" />
+                <input type="file" multiple="multiple" hidden name="images" id="file" accept="image/*" />
                 <label for="file" class="choose"><span class="material-symbols-outlined">image</span>choose
                     image</label>
             </div>
@@ -70,6 +70,9 @@
                     Submit
                 </button>
             </div>
+            {% for message in messages %}
+            <p style="color: lightgreen;">{{message}}</p>
+            {% endfor %}
         </form>
     </div>
 

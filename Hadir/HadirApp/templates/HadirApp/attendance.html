@@ -1,123 +1,69 @@
-<!DOCTYPE html>
-<html lang="ar">
+{% extends 'HadirApp/base.html'%}
+
+{% block main_content %}
+
+{% load static %}
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>attendance</title>
-    <link rel="stylesheet" href="log-reg-style.css">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="attendance.css">
-
-    <!-- <link rel="stylesheet" href="../front/mainStyle.css"> -->
+    
+    <style>
+    body {
+        background: #ECF0F1 !important;
+        
+    }
+    #image{
+        margin: 20px 0 20px;
+        border: 1px dotted black;
+        height: 480px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    #image h1{
+        color: rgba(0, 0, 0, 0.4);
+    }
+    
+    </style>
 </head>
 
 <body>
-    <div class="page-wrapper">
-        <div class="nav-wrapper">
-            <div class="grad-bar"></div>
-            <nav class="navbar">
-                <a href="/index.html"><img src="/media/logo.png"></a>
-                <div class="menu-toggle" id="mobile-menu">
-                    <a class="nav-item" href="register.html" target="_blank">Register</a>
-                    <a class="nav-item" href="login.html" target="_blank">Login</a>
 
-                    <!-- <span class="bar">a</span>
-                    <span class="bar">b</span>
-                    <span class="bar">c</span> -->
-
-                </div>
-                <ul class="nav no-search">
-                    <!-- <li class="nav-item"><a href="#">Home</a></li> -->
-                    <!-- <li class="nav-item"><a href="#">Contact Us</a></li> -->
-                    <a class="nav-item" href="/register.html" target="_blank">Register</a>
-                    <a class="nav-item" href="/login.html" target="_blank">Login</a>
-                    <!-- <i class="fas fa-search" id="search-icon"></i> -->
-                    <!-- <input class="search-input" type="text" placeholder="Search.."> -->
-                </ul>
-            </nav>
-        </div>
-
-        <div class="page">
-            <div class="page-header cf">
-                <h2>Students</h2>
-            </div>
-            <ul class="student-list">
-                <li class="student-item cf">
-                    <div class="student-details">
-                        <img class="avatar" src="/media/abdul.jpeg">
-                        <h3>Abdullah Saad Althobaiti</h3>
-                        <span class="email">Althobaiti@example.com</span>
+    <h1>{{class_name}}</h1>
+        <div class="container">
+            <h1> Insert a photo of the hall</h1>
+            
+            <form action="" method="POST">
+                {% csrf_token %}
+            <div id="image">
+                <label for="date"></label>
+                <input type="text" name="id" id="">
+                <label for="file"><h1>add image from galary</h1></label>
+                    <input type="file" multiple="multiple" hidden name="images" id="file" accept="image/*" />
                     </div>
-                    <div class="joined-details">
-                        <span class="date">Joined 4:00</span>
-                    </div>
-                </li>
-                <li class="student-item cf">
-                    <div class="student-details">
-                        <img class="avatar" src="/media/moh.jpg">
-                        <h3>Khaled Saleh Alwagdani</h3>
-                        <span class="email">Khaled@example.com</span>
-                    </div>
-                    <div class="joined-details">
-                        <span class="date">Joined 4:00</span>
-                    </div>
-                </li>
-                <li style="background-color: red;  background-image: linear-gradient(to left,rgb(255, 255, 255), rgb(149, 5, 5));"
-                    class="student-item cf">
-                    <div class="student-details">
-                        <img class="avatar" src="/media/egg.jpg">
-                        <h3>Marwan Saleh Alghamdi</h3>
-                        <span class="email">marwan@example.com</span>
-                    </div>
-                    <div class="joined-details">
-                        <span class="date">Joined 4:00</span>
-                    </div>
-                </li>
-                <li class="student-item cf">
-                    <div class="student-details">
-                        <img class="avatar" src="/media/ibra.jpg">
-                        <h3>Ibrahim Rudayed Alsufyani</h3>
-                        <span class="email">Ibrahim@example.com</span>
-                    </div>
-                    <div class="joined-details">
-                        <span class="date">Joined 4:00</span>
-                    </div>
-                </li>
-                <li style="background-color: red;  background-image: linear-gradient(to left,rgb(255, 255, 255), rgb(149, 5, 5));"
-                    class="student-item cf">
-                    <div class="student-details">
-                        <img class="avatar" src="/media/mh1.jpg">
-                        <h3>Mohammed Fawaz Aِl-Malki</h3>
-                        <span class="email">Mohammed@example.com</span>
-                    </div>
-                    <div class="joined-details">
-                        <span class="date">Joined 4:00</span>
-                    </div>
-                </li>
-                <li class="student-item cf">
-                    <div class="student-details">
-                        <img class="avatar" src="/media/abu.jpg">
-                        <h3>Abdullah Mugbil Alshalawi</h3>
-                        <span class="email">Abdullah@example.com</span>
-                    </div>
-                    <div class="joined-details">
-                        <span class="date">Joined 4:00</span>
-                    </div>
-                </li>
+                    <button style="margin: auto;"type="submit" name="insert" id="insert">Insert</button>
+                </form>
+        </div> 
 
 
-            </ul>
-        </div>
+        <script>
+            const create = document.getElementById("create");
+            // console.log('si senior');
+            
+            create.addEventListener('click',(event)=>{
 
-        <footer style=" position: relative;
-        ">
-
-            <p> ©2022
-                Capstone project section (198), All Rights Reserved
-            </p>
-        </footer>
+            const img = document.querySelector('#qr');
+            const numOfStudents = document.getElementById("numOfStudents").value;
+            console.log(numOfStudents);
+            img.style.opacity = "100";
+            });
+            
+            // function click() {
+           
+            // }
+        </script>
 </body>
 
 </html>
+
+{% endblock %}

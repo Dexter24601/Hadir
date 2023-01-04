@@ -1,0 +1,151 @@
+{% extends 'HadirApp/base.html' %}
+
+{% block main_content %}
+
+{% load static %}
+
+
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
+<body>
+    <div class="container">
+        <div class="title">
+            <h1> {{class_name}}-{{class_id}} Attendance Page</h1>
+        </div>
+        <div class="main">
+
+            <div class="date">
+                <p>Date</p>
+                <input type="date" placeholder="DD/MM/YYYY">
+            </div>
+            <div>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <p>Enter Students</p>
+                    {% for student in students%}
+                    <label for="{{student}}">{{student}}</label>
+                    <input type="checkbox" name="student" value="{{student}}">
+                    {% endfor%}
+                    </select>
+            </div>
+            <div class="class-img">
+                <p>Upload class image</p>
+                <input type="file" multiple="multiple" name="images" id="file" accept="image/*" />
+                <label for="file" class="choose"><span class="material-symbols-outlined">image</span>choose
+                    image</label>
+
+            </div>
+            <div>
+                <input type="submit" value="submit" class="click">
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+<style>
+    .container {
+        background-color: whitesmoke;
+        width: 70%;
+        margin: 5% auto 0 auto;
+        border-radius: 10px;
+        padding-bottom: 5%;
+        border: 1px solid black;
+
+    }
+
+    .main {
+        margin-left: 20%;
+    }
+
+    .title {
+        margin-bottom: 2%;
+    }
+
+    .main p {
+        font-size: 30px;
+        color: rgb(57, 129, 188);
+        text-align: left;
+    }
+
+    select,
+    input {
+        display: block;
+        margin: 2% 3%;
+        width: 50%;
+        height: 40px;
+        border-radius: 10px;
+    }
+
+    span {
+        font-size: 20px;
+        color: rgb(155, 155, 155);
+    }
+
+    input {
+        border: 16px black;
+        border: 1px solid black;
+
+    }
+
+    .click {
+        background-color: #FFF;
+        border: 2px #000;
+        margin-left: 5%;
+        cursor: pointer;
+        transition: .2s ease-in-out 0s;
+        border: 1px solid rgb(57, 129, 188);
+
+    }
+
+    .choose {
+        background-color: #fff;
+        height: 60px;
+        width: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 16px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    span {
+        color: #000;
+    }
+
+    .class-img input {
+        position: absolute;
+        z-index: -1;
+    }
+
+    .class-img label {
+        margin: 5% 0 5% 3%;
+        width: 50%;
+        transition: .2s ease-in-out 0s;
+        border: 1px solid black;
+
+    }
+
+    .click:hover {
+        transform: scale(1.1);
+        color: #FFF;
+        background-color: rgb(57, 129, 188);
+    }
+
+    @media (max-width: 530px) {
+        .class-img label {
+            width: 60%;
+        }
+    }
+
+    @media (max-width: 462px) {
+        .main a {
+            font-size: 20px;
+        }
+    }
+</style>
+{% endblock %}

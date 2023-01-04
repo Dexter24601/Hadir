@@ -33,12 +33,24 @@
                 {% csrf_token %}
                 <label for="">Section ID</label>
                 <input type="text" id="classID" name="classID" maxlength="3" required="required">
+
+                {% if IDErr %}
+                <p style="color: brown;">{{ IDErr }}</p>
+                {% endif %}
+
+
                 {% if idErr %}
                 <p style="color: brown;">{{ idErr }}</p>
                 {% endif %}
+
                 <br>
                 <label for="">Course Name</label>
                 <input name="className" id="className" type="text" maxlength="20" required="required">
+
+                {% if nameErr %}
+                <p style="color: brown;">{{ nameErr }}</p>
+                {% endif %}
+
                 <br>
                 <label for="numOfStudents">Number of students</label>
                 <input type="number" name="numOfStudents" id="numOfStudents" min="10" max="100" required="required">
@@ -90,10 +102,8 @@
                 <button class="Generate" type="button">Generate QR-Code</button>
 
                 <div>
-                    <a href="" target="_blank">
-                        <img style="display: none;" class="qrImg" src="" alt=" " width="256" height="256">
+                    <img style="display: none;" class="qrImg" src="" alt=" " width="256" height="256">
 
-                    </a>
                     <a id="aa" href="" target="_blank"></a>
                 </div>
 
@@ -110,23 +120,24 @@
             className = wrapper.querySelector("#className")
         createBtn = wrapper.querySelector('.Create'),
             generateBtn = wrapper.querySelector(".Generate"),
-            qrImg = wrapper.querySelector('img'),
+            qrImg = wrapper.querySelector('.qrImg'),
             url = wrapper.querySelector('#aa');
         let preValue;
 
 
         generateBtn.addEventListener('click', () => {
 
+            if (!classID.value || !className.value) return;
             qrImg.style.display = 'block'
             createBtn.style.display = 'block';
             console.log(className);
             let qrValue = (className.value + '-' + classID.value).trim();
             console.log(qrValue);
-            if (!qrValue || preValue === qrValue) return;
+            if (!classID.value || preValue === qrValue) return;
             preValue = qrValue;
             generateBtn.innerText = "Generating QR Code...";
-            qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://localhost:8000/Hadir/student_enrollment/${qrValue}`;
             url.href = `http://localhost:8000/Hadir/student_enrollment/${qrValue}`;
+            qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${url.href}`;
 
             qrImg.addEventListener('load', () => {
                 wrapper.classList.add("active");

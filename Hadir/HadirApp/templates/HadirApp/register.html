@@ -23,7 +23,7 @@
         <div class="nav-wrapper">
             <div class="grad-bar"></div>
             <nav class="navbar">
-                <a href="/Hadir"><img src="{% static 'Hadir/media/logo.png' %}"></a>
+                <a href="/Hadir/"><img src="{% static 'Hadir/media/logo.png' %}"></a>
                 <div class="menu-toggle" id="mobile-menu">
                     <a class="nav-item" href="register">Register</a>
                     <a class="nav-item" href="login">Login</a>
@@ -44,30 +44,44 @@
             </nav>
         </div>
 
+        <!-- {{form.username.label}} -->
+        <!-- {{form.email.label}} -->
+        <!-- {{form.password1.label}} -->
+        <!-- {{form.password2.label}} -->
         <div id="container">
 
             <form id="log-form" action="register" method="POST">
                 {% csrf_token %}
-
                 <div class="box">
                     <h1>
                         Register
                     </h1>
-                    <input class="input" type="email" placeholder="Email@example.com" minlength="3" required='required'
-                        name="email" id="email">
+                    <!-- <input class="input" type="email" placeholder="Email@example.com" minlength="3" required='required'
+                        name="email" id="email"> -->
+                    {{form.email.label}}
+                    {{form.email}}
+
                     {% if err %}
 
                     <span style="color: brown;" id="emailError">{{ err }}</span>
                     {% endif %}
 
-                    <input class="input" type="text" placeholder="username" autocomplete="off" name="username"
-                        id="username">
+                    <!-- <input class="input" type="text" placeholder="username" autocomplete="off" name="username"
+                        id="username"> -->
+                    {{form.username.label}}
+                    {{form.username}}
 
-                    <input class="input" type="password" placeholder="P@$$w0rd" title="6 char at least" maxlength="20"
-                        minlength="6" required='required' name="password" id="password">
 
-                    <input class="input" type="password" placeholder="Re enter P@$$w0rd" title="6 char at least"
-                        maxlength="20" minlength="6" required='required' name="password2" id="password2">
+                    <!-- <input class="input" type="password" placeholder="P@$$w0rd" title="6 char at least" maxlength="20"
+                        minlength="6" required='required' name="password" id="password"> -->
+                    {{form.password1.label}}
+                    {{form.password1}}
+
+
+                    <!-- <input class="input" type="password" placeholder="Re enter P@$$w0rd" title="6 char at least"
+                        maxlength="20" minlength="6" required='required' name="password2" id="password2"> -->
+                    {{form.password2.label}}
+                    {{form.password2}}
 
                     {% if err2 %}
 

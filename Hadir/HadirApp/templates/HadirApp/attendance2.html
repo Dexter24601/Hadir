@@ -1,0 +1,89 @@
+{% extends 'HadirApp/base.html'%}
+
+{% block main_content %}
+
+{% load static %}
+<div class="page">
+    <div class="page-header cf">
+        <h2>Students</h2>
+    </div>
+    <ul class="student-list">
+        <li class="student-item cf">
+            <div class="student-details">
+                <img class="avatar" src="{% static 'Hadir/media/abdul.jpeg' %}" height="128" width="128">
+                <h3>Abdullah Saad Althobaiti</h3>
+                <span class="email">Althobaiti@example.com</span>
+            </div>
+            <div class="joined-details">
+                <span class="date">Joined 4:00</span>
+            </div>
+        </li>
+        <li class="student-item cf">
+            <div class="student-details">
+                <img class="avatar" src="/media/moh.jpg">
+                <h3>Khaled Saleh Alwagdani</h3>
+                <span class="email">Khaled@example.com</span>
+            </div>
+            <div class="joined-details">
+                <span class="date">Joined 4:00</span>
+            </div>
+        </li>
+        <li style="background-color: red;  background-image: linear-gradient(to left,rgb(255, 255, 255), rgb(149, 5, 5));"
+            class="student-item cf">
+            <div class="student-details">
+                <img class="avatar" src="/media/egg.jpg">
+                <h3>Marwan Saleh Alghamdi</h3>
+                <span class="email">marwan@example.com</span>
+            </div>
+            <div class="joined-details">
+                <span class="date">Joined 4:00</span>
+            </div>
+        </li>
+        <li class="student-item cf">
+            <div class="student-details">
+                <img class="avatar" src="/media/ibra.jpg">
+                <h3>Ibrahim Rudayed Alsufyani</h3>
+                <span class="email">Ibrahim@example.com</span>
+            </div>
+            <div class="joined-details">
+                <span class="date">Joined 4:00</span>
+            </div>
+        </li>
+        <li style="background-color: red;  background-image: linear-gradient(to left,rgb(255, 255, 255), rgb(149, 5, 5));"
+            class="student-item cf">
+            <div class="student-details">
+                <img class="avatar" src="/media/mh1.jpg">
+                <h3>Mohammed Fawaz Aِl-Malki</h3>
+                <span class="email">Mohammed@example.com</span>
+            </div>
+            <div class="joined-details">
+                <span class="date">Joined 4:00</span>
+            </div>
+        </li>
+        <li class="student-item cf">
+            <div class="student-details">
+                <img class="avatar" src="/media/abu.jpg">
+                <h3>Abdullah Mugbil Alshalawi</h3>
+                <span class="email">Abdullah@example.com</span>
+            </div>
+            <div class="joined-details">
+                <span class="date">Joined 4:00</span>
+            </div>
+        </li>
+
+
+    </ul>
+</div>
+
+<footer style=" position: relative;
+        ">
+
+    <p> ©2022
+        Capstone project section (198), All Rights Reserved
+    </p>
+</footer>
+</body>
+
+</html>
+
+{% endblock %}

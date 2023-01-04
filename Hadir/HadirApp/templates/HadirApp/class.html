@@ -10,5 +10,14 @@
 </ul>
 
 {% endfor %}
-<a href="/Hadir/student_enrollment/{{currentClass.class_name}}-{{currentClass.class_id}}"> add students</a>
+<br>
+<a href="/Hadir/student_enrollment/{{currentClass.class_name}}-{{currentClass.class_id}}"> add students</a> <br>
+
+<br>
+<a href="/Hadir/Classes/{{currentClass.class_name}}-{{currentClass.class_id}}/Attendance"> Take Attendance
+</a><br>
+
+<br>
+<a href="/Hadir/Classes/{{currentClass.class_name}}-{{currentClass.class_id}}/Dashboard"> Dashboard
+</a>
 {% endblock %}

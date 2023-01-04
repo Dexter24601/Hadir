@@ -4,198 +4,362 @@
 
 {% load static %}
 
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+
 <title> Main page </title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 <style>
-  body {
-    background: whitesmoke;
-    color: black;
-    margin: 0;
-    padding: 0;
-  }
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
 
   * {
-    font-family: 'Poppins', sans-serif;
-  }
-
-  .top_nav {
-    background-color: #C4C4C4;
-    height: 60px;
-    width: 100%;
-    box-shadow: 0 10px #C4C4C4
-  }
-
-  label.logo {
-
-    position: absolute;
-    margin-top: 0px;
-    margin-left: 10px;
-  }
-
-  label.logo_text {
-    font-size: 20px;
-    line-height: 80px;
-    padding: 50px 170px;
-    font-weight: bold;
+    font-family: sans-serif;
+    background: white important !;
+    font-family: "Poppins", sans-serif;
 
   }
 
-  .top_nav ul {
-    float: right;
-    margin-right: 20px;
-    list-style: none;
-    text-decoration: none;
-  }
-
-  .top_nav ul li {
-
-    display: inline-block;
-    line-height: 50px;
-    margin: 0 5px;
-  }
-
-  .top_nav ul li a {
-    color: black;
-    padding: 7px 13px;
-    list-style: none;
-    text-decoration: none;
-    font-size: 16px;
-
-    border-radius: 5px;
-    ;
-    text-transform: uppercase;
-  }
-
-  .top_nav ul ul li a {
-    font-size: 12px;
-  }
-
-  .top_nav ul ul {
-    position: absolute;
-    top: 60px;
-    display: none;
-  }
-
-  .top_nav ul li:hover>ul {
-    display: block;
-  }
-
-  .top_nav a:hover {
-    background-color: #ddd;
-    color: #000000;
-  }
-
-  .top_nav a.active {
-    background-color: white;
-    color: white;
-  }
-
-  .top_nav .icon {
-    display: none;
-  }
-
-  table {
-    border: 0px solid black;
-    margin-left: auto;
-    margin-right: auto;
+  .row {
+    width: 95%;
     text-align: center;
-    font-size: 20px;
-
-    width: 70%;
+    margin: auto;
   }
 
-  table thead th a {
-    text-decoration: none;
+  .columns {
+    width: 33%;
+    height: 120px;
+    min-width: 280px;
+    vertical-align: middle;
+    margin-bottom: 5px;
+    display: inline-block;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 10px;
     color: black;
-    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 3px 10px rgb(0 0 0 /0.2);
+    cursor: pointer;
+    transition: 220ms;
 
   }
 
-  .container {
-    margin: 50px auto;
-    padding: 30px;
-    height: 300px;
-    width: 1250px;
-    box-shadow: 2px 2px 10px 3px #ddd;
+  .align-right {
+    text-align: right;
   }
 
-  .sub-container {
-    margin: 50px auto;
+  @media screen and (min-width: 844px) {
+    .columns {
+      width: 30%;
+      height: 200px;
+      justify-content: space-between;
+      padding: 10px;
+
+    }
+  }
+
+  .columns img {
+    padding: 1rem;
+    height: 80px;
+  }
+
+  .columns h3 {
+    color: black;
+    font-size: 20px;
+  }
+
+  .columns p {
+    color: black;
+    font-size: 14px;
+    line-height: 1.63;
+
+  }
+
+  .btn {
+    color: #fff;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background: #599dd5;
+    border-radius: 5px;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .columns:hover {
+    transform: scale(1.2);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .info {
     padding: 30px;
-    height: 500px;
-    width: 1250px;
-    box-shadow: 2px 2px 10px 3px #ddd;
+    margin: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 /0.2);
+    color: black;
+    font-family: 'sans-serif';
+  }
+</style>
+
+
+
+</head>
+
+<body>
+  <p>Welcome {{request.user}}</p>
+  <br>
+  <div class="container">
+    <h2> Main Features </h2>
+    <br>
+    <div class="row">
+
+      <a href="Create_class">
+        <div class="columns">
+          <img src="{% static 'Hadir/media/create.png' %}">
+          <h3>Create A Class</h3>
+          <p>To track class attendance, create your class details !
+          </p>
+          <!-- <a href="#" class="btn">Create</a> -->
+        </div>
+      </a>
+
+      <!-- <a href="Attendance">
+        <div class="columns">
+          <img src="{% static 'Hadir/media/take.png' %}">
+          <h3>Take Attendance</h3>
+          <p>After creating a class, register the class attendance.
+          </p>
+
+        </div>
+      </a> -->
+      <a href="Classes">
+        <!-- {% static 'Hadir/media/create.png' %}
+        {% static 'Hadir/media/take.png' %}
+        {% static 'Hadir/media/dashboard-icon.png' %} -->
+        <div class="columns"><img src="{% static 'Hadir/media/dashboard-icon.png' %}">
+          <h3>View Classes</h3>
+          <p>You can view the attendance data via a Dashboard !
+          </p>
+          <!-- <a href="#" class="btn">View</a> -->
+        </div>
+      </a>
+    </div>
+    <div class="info">
+      <h2>About </h2>
+      <br>
+      <p>
+      <h3> Create a Class </h3>
+      <p>By clicking on the “Create button” the system
+        will generate a QR code for the form and display it on the projector so the whole class can access it,
+        each attendee will enter their name, ID, and 3 portrait photos of their face in each direction(front,
+        left-side, right side) and submits the form, the system will then store their data in the database,
+        each attendee will have his own profile in the system.
+        This process will be done only once for each class/course.</p>
+
+      <h3> Take Attendance</h3>
+      <p class="">After creating a class, you can simply click on the created class and insert an image of the class in
+        order to register the class attendance.
+        This process will be done every day by the user. Through Face Recognition Technology. A copy of each image will
+        be
+        sent to the database for updating the dataset
+      </p>
+
+      <h3> View Attendence </h3>
+      <p>You can view the attendance data via a dashboard to manage and view the overall
+        attendance over the class. By selecting a course in the dashboard, the user can view the absence
+        rate of students in that course. With the dashboard,
+        the user experience is improved in terms of visibility and performance!</p>
+
+
+    </div>
+
+
+</body>
+
+</html>
+
+{% endblock %}
+
+
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+
+<title> Main page </title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+  * {
+    font-family: sans-serif;
+    background: white;
+    font-family: "Poppins", sans-serif;
+
+  }
+
+  .row {
+    width: 95%;
+    text-align: center;
+    margin: auto;
+  }
+
+  .columns {
+    width: 33%;
+    height: 120px;
+    min-width: 280px;
+    vertical-align: middle;
+    margin-bottom: 5px;
+    display: inline-block;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+    box-shadow: 0 3px 10px rgb(0 0 0 /0.2);
+    cursor: pointer;
+    transition: 220ms;
+  }
+
+  .align-right {
+    text-align: right;
+  }
+
+  @media screen and (min-width: 844px) {
+    .columns {
+      width: 30%;
+      height: 200%;
+      justify-content: space-between;
+    }
+  }
+
+  .columns img {
+    padding: 1rem;
+    height: 80px;
+  }
+
+  .columns h3 {
+    color: black;
+    font-size: 20px;
+  }
+
+  .columns p {
+    color: black;
+    font-size: 14px;
+    line-height: 1.63;
+
+  }
+
+  .btn {
+    color: #fff;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background: #599dd5;
+    border-radius: 5px;
+    display: inline-block;
+    text-decoration: none;
+  }
+
+  .columns:hover {
+    transform: scale(1.2);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .info {
+    padding: 30px;
+    margin: 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 /0.2);
+    color: black;
+    font-family: 'sans-serif';
   }
 </style>
 
 <head>
 
+
 </head>
 
 <body>
 
-  <div class="container">
-    <h2> Main Features </h2>
+  <br>
+  <p style="margin: 10; padding: 5px; font-size: 25px; ">Main Features</p>
+  <div class="row">
 
-    <table>
-      <br>
-      <thead>
-        <th> <a href="#"> <img src="{% static 'Hadir/media/take.png' %}" width="110" height="100"><br>Take Attendance
-        </th>
-        <th> <a href="Classes"> <img src="{% static 'Hadir/media/dashboard-icon.png' %}" width="110"
-              height="100"><br>View
-            Classes</th>
-        <th> <a href="Create_class"><img src="{% static 'Hadir/media/create.png' %}" width="110" height="100"><br>Create
-            A
-            Class
-        </th>
-      </thead>
-    </table>
+    <a href="">
+      <div class="columns">
+        <img src="create.png">
+        <h3>Create A Class</h3>
+        <p>To track class attendance, create your class details !
+        </p>
+        <!-- <a href="#" class="btn">Create</a> -->
+      </div>
+    </a>
+
+    <a href="">
+      <div class="columns">
+
+        <img src="Take.png">
+        <h3>Take Attendance</h3>
+        <p>After creating a class, register the class attendance.
+        </p>
+
+      </div>
+    </a>
+    <a href="#">
+
+      <div class="columns"><img src="dashboard-icon.png">
+        <h3>View Attendance</h3>
+        <p>You can view the attendance data via a Dashboard !
+        </p>
+        <!-- <a href="#" class="btn">View</a> -->
+      </div>
+    </a>
   </div>
-  <div class="sub-container">
-    <h3> Take Attendance</h3>
-    <br>
-    <article>After creating a class, you can simply click on the created class and insert an image of the class in order
-      to register the class attendance.
-      This process will be done every day by the user. Through Face Recognition Technology. A copy of each image will be
-      sent to the database for updating the dataset, and another copy will be sent to the server (engine) where it will
-      be processed by the following operations:
-      Face Detection
-      The first step in the image processing operation is to detect human faces in the given image.
-      Face Alignment
-      Face images are aligned using landmarks before they are sent to the face recognition process.
-      In addition to the bounding box and confidence score, it also outputs a five-point landmark.
-      Feature Extraction
-      feature extraction is the key to constructing an efficient predictive model.By the help of PCA algorithm
-      (Principles Component Analysis) that extracts the mean face and their feature vectors and concatenates them as the
-      feature vector for face recognition.
-      Feature matching
-      After extracting features and the mean face,
-      Return Results
-      Results will be returned back to the website as a grid whether a match was found or not, in case of a match, the
-      names of the recognized faces will appear in green as present, the unrecognized faces will appear in grey as
-      unknown,
-      the names that have not found a match will appear in red and be considered absent.</article>
-    <br>
-    <h3> View Attendence </h3>
-    <br>
-    <article>You can view the attendance data via a dashboard to manage and view the overall
-      attendance over the class. By selecting a course in the dashboard, the user can view the absence
-      rate of students in that course. With the dashboard,
-      the user experience is improved in terms of visibility and performance!</article>
 
+  <div class="info">
+    <h2>About </h2>
     <br>
-
+    <p>
     <h3> Create a Class </h3>
-    <br>
-    <article>By clicking on the “Create button” the system
+    <p>By clicking on the “Create button” the system
       will generate a QR code for the form and display it on the projector so the whole class can access it,
       each attendee will enter their name, ID, and 3 portrait photos of their face in each direction(front,
       left-side, right side) and submits the form, the system will then store their data in the database,
-      each attendee will have his own row in the DB table and the website table.
-      This process will be done only once for each class/course.</article>
+      each attendee will have his own profile in the system.
+      This process will be done only once for each class/course.</p>
+
+    <h3> Take Attendance</h3>
+    <p class="">After creating a class, you can simply click on the created class and insert an image of the class in
+      order to register the class attendance.
+      This process will be done every day by the user. Through Face Recognition Technology. A copy of each image will be
+      sent to the database for updating the dataset
+    </p>
+
+    <h3> View Attendence </h3>
+    <p>You can view the attendance data via a dashboard to manage and view the overall
+      attendance over the class. By selecting a course in the dashboard, the user can view the absence
+      rate of students in that course. With the dashboard,
+      the user experience is improved in terms of visibility and performance!</p>
+
 
   </div>
+
+
 </body>
 
 </html>
-{% endblock %}

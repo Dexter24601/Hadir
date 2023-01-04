@@ -1,0 +1,11 @@
+<form action="register" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" name="Create User" id="">
+</form>
+
+<!-- {{form.as_p}} -->
+<!-- {{form.username.label}} -->
+<!-- {{form.email.label}} -->
+<!-- {{form.password1.label}} -->
+<!-- {{form.password2.label}} -->
