@@ -2,27 +2,25 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import RegexValidator
 
+from datetime import date
+
+from django.contrib.auth.models import User
+
 # Create your models here.
 
 
-class User(models.Model):  # instructor
-    username = models.CharField(max_length=20, default='user')
-    password = models.CharField(max_length=20)
-    email = models.EmailField(primary_key=True, max_length=50)
-    # auto_now_add=True/default=timezone.now
-    reg_date = models.DateTimeField('date registered', auto_now_add=True)
-
-    def __str__(self):
-        return self.username
-
-
 class Class(models.Model):
+
+    instructor = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+
     class_id = models.CharField(primary_key=True, max_length=3, validators=[
                                 RegexValidator(r'\d{3}')])
     class_name = models.CharField(max_length=50)
     # students = models.ForeignKey(Student, null=True)
-
+    classImgs = models.FileField(max_length=300, null=True)
     # num_of_students = models.PositiveIntegerField()
+    # present_students = models.
+
     def __str__(self):
         return (f'{self.class_name}-{self.class_id}')
 
@@ -36,6 +34,7 @@ class Student(models.Model):
     reg_date = models.DateTimeField('date registered',  auto_now_add=True)
     # null=True, on_delete=models.SET_NULL
     classes = models.ManyToManyField(Class)
+    precense = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -51,8 +50,15 @@ class Image(models.Model):
     def __str__(self):
         return self.images.name
 
-# class Attendance(models.Model):
-#       presence_date = models.DateTimeField('lecture date',auto_now_add=True)
-#     present = models.IntegerField()
-#     abcent = models.IntegerField()
-#     student = models.ForeignKey(Student)
+
+class Attendance(models.Model):
+    presence_date = models.DateField(primary_key=True, default=date.today)
+    # verbose_name='%Y-%M-%D'
+
+    student = models.ManyToManyField(Student)
+
+    clas = models.ForeignKey(Class, null=True, on_delete=models.SET_NULL)
+    # abcent = models.IntegerField()
+
+    def __str__(self):
+        return (f'{self.clas}-{self.presence_date}')

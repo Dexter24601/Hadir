@@ -1,10 +1,22 @@
-from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
-from django.urls import reverse
-from .models import User, Student, Class, Image
 import re  # regex
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
+from .forms import RegisterForm
+from django.urls import reverse
+from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Student, Class, Image, Attendance
 
-# Create your views here.
+from datetime import date
+
+import sys
+sys.setrecursionlimit(10000)
+
+
+def temp(request):
+    return redirect('/Hadir/')
 
 
 def index(request):
@@ -22,6 +34,7 @@ def index(request):
     return render(request, 'HadirApp/index.html')
 
 
+@login_required(login_url='./login')
 def detail(request):
     users = User.objects.all()
     students = Student.objects.all()
@@ -31,8 +44,29 @@ def detail(request):
     return render(request, 'HadirApp/detail.html', context)
 
 
-def register(request):
+def registerPage(request):
 
+    if request.user.is_authenticated:
+        return redirect('/Hadir/main')
+    else:
+        if request.method == 'POST':
+            form = RegisterForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.save()
+                login(request, user)
+                # print(f" 11111111111111111{form.username}")
+                # print(user.username)
+                return redirect('/Hadir/main')
+                # return render(request, 'HadirApp/MainPage.html', {'user': user})
+
+        else:
+            print(request.method)
+            form = RegisterForm()
+            user = None
+        return render(request, 'HadirApp/register.html', {'form': form})
+
+    '''
     if request.method == 'POST':
         email = request.POST['email']
         username = request.POST['username']
@@ -59,23 +93,45 @@ def register(request):
             print("ERROR")
             return redirect('/404')
 
-    # context = {
-    #     'err':err,
-    # }
-    return render(request, 'HadirApp/register.html')
+    context = {
+        'err':err,
+    }
+    return render(request, 'HadirApp/sign-up.html', {'form': form})
+    '''
 
 
-def login(request):
+def loginPage(request):  # redirect to the page user was on
 
-    if request.method == 'POST':
-        logEmail = request.POST['email']
-        logPassword = request.POST['password']
+    if request.user.is_authenticated:
+        return redirect('/Hadir/main')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            logPassword = request.POST.get('password')
+            # rawPass = logPassword.clear
+
+            user = authenticate(request, username=username,
+                                password=logPassword)
+            if user is not None:
+                login(request, user)
+                print(f'User {user} has logged in succesfuly')
+                # return render(request, 'HadirApp/MainPage.html', {'user': user})
+                return redirect('/Hadir/main')
+            else:
+                Err = ('Email/Password is Invalid')
+                return render(request, './HadirApp/login.html', {'Err': Err})
+
+            # old way
+            '''
         if User.objects.filter(password=logPassword, email=logEmail).exists():
             user = User.objects.get(password=logPassword, email=logEmail)
             user.save()
             print(f'welcome back {user}')
+            if user is not None:
+                login(request, user)
+            # login(request, user)
             # return redirect(f'/{user.username}/welcomeBack')
-            return redirect('/Hadir/main')
+            return render(request, 'HadirApp/MainPage.html', {'user': user})
         elif User.objects.filter(email=logEmail).exists():
             passErr = ('Password is Invalid')
             return render(request, 'HadirApp/login.html', {'passErr': passErr, })
@@ -83,22 +139,43 @@ def login(request):
         else:
             emailErr = ('Email is Invalid')
             return render(request, 'HadirApp/login.html', {'emailErr': emailErr, })
+        '''
+            '''
+            if Instructor.objects.get(email=logEmail):
+                if Instructor.objects.get(password=logPassword):
 
-        #     if User.objects.get(email=logEmail):
-        #         if User.objects.get(password=logPassword):
+                    print(f'welcome back {user}')
+                    redirect(f'/{user.username}/welcomeBack')
+                else:
+                    redirect('/404')
+                    print('Wrong Password')
+            else:
+                redirect('/404')
+                print("Email Doesnt Exsist")
+            except:
+            '''
+        else:
+            return render(request, './HadirApp/login.html',)
 
-        #             print(f'welcome back {user}')
-        #             redirect(f'/{user.username}/welcomeBack')
-        #         else:
-        #             redirect('/404')
-        #             print('Wrong Password')
-        #     else:
-        #         redirect('/404')
-        #         print("Email Doesnt Exsist")
-        # except:
 
-    return render(request, './HadirApp/login.html')
+@login_required(login_url='./login')
+def LogoutUser(request):
+    logout(request)
+    # return render(request, 'HadirApp/login.html')
+    return redirect('/Hadir/login')
 
+
+@login_required(login_url='./login')
+def mainPage(request):
+
+    # if request.method == "POST":
+    # if user is not None:
+    #     currentUser = user
+    # {'currentUser': currentUser}
+    return render(request, 'HadirApp/MainPage.html')
+    # else:
+    #     print(request.method)
+    #     return redirect('/Hadir/login')
 
 
 def student_enrollment(request, class_name, class_id):
@@ -119,22 +196,25 @@ def student_enrollment(request, class_name, class_id):
         try:
             if Student.objects.filter(student_id=student_id).exists():
                 st = Student.objects.get(student_id=student_id)
+                print(st.classes.all())
 
                 for clas in st.classes.all():
-
-                    if st.classes == classes:
+                    if clas == classes:
                         idErr = 'A Student with this ID already exsist in this class'
                         print(idErr)
                         return render(request, 'HadirApp/student_enrollment.html', {'idErr': idErr})
-                
+
                 st.classes.add(classes)
                 st.save()
+
+                # succMsg = (f'Student {st.name} has been added to {classes.class_name} class succesfuly')
+                # print(succMsg)
 
                 messages.success(
                     request, f'Student {st.name} has been added to {classes.class_name} class succesfuly')
                 # 'succMsg':succMsg
                 return render(request, 'HadirApp/student_enrollment.html', {'class_name': classes.class_name})
-          
+
             elif not match:
                 wrongID = 'Invalid Student ID!'
                 print(wrongID)
@@ -144,6 +224,7 @@ def student_enrollment(request, class_name, class_id):
             student = Student.objects.create(
                 name=name, student_id=student_id)  # classes=classes
 
+            print('alive!')
             student.classes.add(classes)  # solution for many to many
             student.save()
             print(f'student {student} is registered')
@@ -169,24 +250,31 @@ def upload(request):
     return render(request, 'index.html', {'images': images})
 
 
-def mainPage(request):
-
-    return render(request, 'HadirApp/MainPage.html')
-
-
+@login_required(login_url='./login')
 def images(request):
     image = Image.objects.all()
-    for img in image:  # muted!!
+    for img in image:
         print(img)
     return render(request, 'HadirApp/images.html', {'image': image})
 
 
+@login_required(login_url='./login')
 def create_class(request):
 
     if request.method == 'POST':
         classID = request.POST['classID']
         className = request.POST['className']
         # numOfStudents = request.POST['numOfStudents']
+
+        matchName = re.match(r'\D{3,50}', className)
+        matchID = re.match(r'\d{3}', classID)
+
+        if not matchName:
+            nameErr = 'Invalid Class Name'
+            return render(request, 'HadirApp/class_form.html', {'nameErr': nameErr})
+        elif not matchID:
+            IDErr = 'Invalid Class ID'
+            return render(request, 'HadirApp/class_form.html', {'IDErr': IDErr})
 
         try:
             # num_of_students=numOfStudents
@@ -196,7 +284,7 @@ def create_class(request):
                 return render(request, 'HadirApp/class_form.html', {'idErr': idErr})
 
             newClass = Class.objects.create(
-                class_id=classID, class_name=className,)
+                class_id=classID, class_name=className, instructor=request.user)
             newClass.save()
             succes = (f"Class {className}-{classID} Created Succesfuly")
             print(succes)
@@ -208,12 +296,37 @@ def create_class(request):
     return render(request, 'HadirApp/class_form.html')
 
 
+@login_required(login_url='./login')
 def Classes(request):
-    classes = Class.objects.all()
-    return render(request, 'HadirApp/classes.html', {'classes': classes})
+    # print(request.user)
+    if Class.objects.filter(instructor=request.user).exists():
+        theClasses = []
+        try:
+            for clas in Class.objects.filter(instructor=request.user):
+                # print(clas)
+                if clas.instructor == request.user:
+                    theClasses.append(clas)
+                    print('class found')
+        except:
+            if Class.objects.filter(instructor=request.user).instructor == request.user:
+                theClasses.append(clas)
+
+        return render(request, 'HadirApp/classes.html', {'theClasses': theClasses})
+
+    else:
+        err = "You dont Have Any Classes"
+        return render(request, 'HadirApp/classes.html', {'err': err})
 
 
+@login_required(login_url='./login')
+def dashboard(request, class_name, class_id):
+    students = []
+    # for student in Student.objects.all():
+    #     st
+    return render(request, 'HadirApp/dashboard.html', {'class_name': class_name})
 
+
+@login_required(login_url='./login')
 def clas(request, class_id, class_name):
 
     try:
@@ -222,8 +335,8 @@ def clas(request, class_id, class_name):
             students = Student.objects.all()
             classStd = []
             for student in students:
-                print(
-                    f'student === {student},,,, classes === {student.classes.all()}')
+                # print(
+                #     f'student === {student},,,, classes === {student.classes.all()}')
                 for clas in student.classes.all():
                     if clas == currentClass:
                         classStd.append(student)
@@ -245,9 +358,55 @@ def clas(request, class_id, class_name):
 
     return render(request, 'HadirApp/class.html')  # , {'classStd': classStd}
 
-def welcomeBack(request, username):
-    return HttpResponse(f"welcome {username}")
-# old way
+
+@login_required(login_url='./login')
+def attendance(request, class_name, class_id):
+
+    today = date.today()
+    print(today)
+    students = Student.objects.all()
+
+    print(request.method)
+    print(Attendance.objects.all())
+    if request.method == "POST":
+        prestudents = request.POST.getlist('student')
+        for student in prestudents:
+            st = Attendance.objects.get(presence_date=today)
+            st.student.add(student)
+            st.save()
+            print(student)
+
+        return render(request, 'HadirApp/take_attendance.html', {'prestudents': prestudents})
+    # return render(request, 'HadirApp/take_attendance.html')
+
+    for student in Student.objects.all():
+        if Attendance.objects.filter(student=student, presence_date=date).exists():
+            stu = Attendance.objects.filter(
+                student=student, presence_date=date)
+            student.precense = True
+
+    # present = Attendance.objects.filter(st)
+    # for st in Student.objects.filter(student):
+    #     print(st)
+
+    context = {'students': students,
+               'class_name': class_name, 'class_id': class_id}
+    return render(request, 'HadirApp/take_attendance.html', context)
+
+
+@login_required(login_url='./login')
+def attendanceResult(request, class_name, class_id):
+
+    # prestudents = request.POST['student']
+    # print(prestudents)
+
+    # {'prestudents': prestudents}
+    # return render(request, 'HadirApp/results.html')
+
+    # else:
+    #     return render('Hadir/404')
+    return render(request, 'HadirApp/results.html')
+    # old way
 
     # template = loader.get_template('HadirApp/welcome.html')
     # context = RequestContext(request, {
@@ -257,9 +416,8 @@ def welcomeBack(request, username):
     # context_dict = context.flatten()
     # return HttpResponse(template.render(context_dict))
 
-
-def absent(request, student_id):
-    student = get_object_or_404(Student, pk=student_id)
+    # def absent(request, student_id):
+    #     student = get_object_or_404(Student, pk=student_id)
 
 
 def PageNotFound(request):
