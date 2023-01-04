@@ -72,6 +72,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Hadir.wsgi.application'
 
 
+DATE_FORMAT = '%y-%m-%d'
+
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
