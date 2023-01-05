@@ -366,24 +366,59 @@ def attendance(request, class_name, class_id):
     print(today)
     students = Student.objects.all()
 
-    print(request.method)
-    print(Attendance.objects.all())
+    # print(request.method)
+    # print(Attendance.objects.all())
     if request.method == "POST":
-        prestudents = request.POST.getlist('student')
-        for student in prestudents:
-            st = Attendance.objects.get(presence_date=today)
-            st.student.add(student)
-            st.save()
-            print(student)
+        studentsNames = request.POST.getlist('student')
+        prestudents = []
+        for name in studentsNames:
+
+            prestudents.append(Student.objects.get(name=name))
+
+        clas = Class.objects.get(class_id=class_id)
+        print(f'class: {clas} ')
+        if Attendance.objects.filter(presence_date=today, clas=clas).exists():
+            print("Exist (Attendance is Already done)")
+            day = Attendance.objects.get(presence_date=today, clas=clas)
+            print(day)
+            for st in prestudents:
+
+                day.student.add(st)
+                day.save()
+                print(f'{st} Marked As Present!')
+
+        else:
+            day = Attendance.objects.create(
+                presence_date=today, clas=clas)
+            day.save()
+            print(f'{day} CREATED!')
+
+            for st in prestudents:
+
+                day.student.add(st)
+                day.save()
+                print(f'{st} Marked As Present!')
+
+            #
+            #     for day in presnt:
+            #         day.student.add(prestudents)
+            # else:
+            #     presnt = Attendance.objects.filter(
+            #         presence_date=today)
+            #     # print(f'presnt: {presnt}')
+            #     for day in presnt:
+            #         day.student.add(prestudents)
+            # st = Attendance.objects.get(presence_date=today)
+            # st.student.add(student)
+            # st.save()
 
         return render(request, 'HadirApp/take_attendance.html', {'prestudents': prestudents})
     # return render(request, 'HadirApp/take_attendance.html')
 
-    for student in Student.objects.all():
-        if Attendance.objects.filter(student=student, presence_date=date).exists():
-            stu = Attendance.objects.filter(
-                student=student, presence_date=date)
-            student.precense = True
+    # for student in Student.objects.all():
+    #     if Attendance.objects.filter(student=student, presence_date=today).exists():
+    #         student.precense = True
+    #         student.save()
 
     # present = Attendance.objects.filter(st)
     # for st in Student.objects.filter(student):
@@ -397,15 +432,15 @@ def attendance(request, class_name, class_id):
 @login_required(login_url='./login')
 def attendanceResult(request, class_name, class_id):
 
-    # prestudents = request.POST['student']
-    # print(prestudents)
+    prestudents = request.POST.getlist('student')
+    print(prestudents)
 
     # {'prestudents': prestudents}
     # return render(request, 'HadirApp/results.html')
 
     # else:
     #     return render('Hadir/404')
-    return render(request, 'HadirApp/results.html')
+    return render(request, 'HadirApp/results.html', {'prestudents': prestudents})
     # old way
 
     # template = loader.get_template('HadirApp/welcome.html')

@@ -43,7 +43,7 @@ class Student(models.Model):
 class Image(models.Model):
     img_id = models.AutoField(primary_key=True)
     images = models.FileField(
-        max_length=300, null=True)
+        max_length=300, null=True, default=None)
     student = models.ForeignKey(Student, null=True, on_delete=models.SET_NULL)
 # CASCADE: When the referenced object is deleted, also delete the objects that have references to it (when you remove a blog post for instance, you might want to delete comments as well). SQL equivalent: CASCADE.
 
@@ -52,7 +52,7 @@ class Image(models.Model):
 
 
 class Attendance(models.Model):
-    presence_date = models.DateField(primary_key=True, default=date.today)
+    presence_date = models.DateField(default=date.today)
     # verbose_name='%Y-%M-%D'
 
     student = models.ManyToManyField(Student)
