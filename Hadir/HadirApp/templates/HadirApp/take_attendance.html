@@ -16,12 +16,12 @@
         </div>
         <div class="main">
 
-            <div class="date">
+            <!-- <div class="date">
                 <p>Date</p>
                 <input type="date" placeholder="DD/MM/YYYY">
-            </div>
+            </div> -->
             <div>
-                <form action="" method="POST">
+                <form action="Results" method="POST">
                     {% csrf_token %}
                     <p>Enter Students</p>
                     {% for student in students%}
@@ -30,13 +30,13 @@
                     {% endfor%}
                     </select>
             </div>
-            <div class="class-img">
+            <!-- <div class="class-img">
                 <p>Upload class image</p>
                 <input type="file" multiple="multiple" name="images" id="file" accept="image/*" />
                 <label for="file" class="choose"><span class="material-symbols-outlined">image</span>choose
                     image</label>
 
-            </div>
+            </div> -->
             <div>
                 <input type="submit" value="submit" class="click">
             </div>
